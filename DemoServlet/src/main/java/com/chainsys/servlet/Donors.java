@@ -2,6 +2,8 @@ package com.chainsys.servlet;
 
 import java.util.ArrayList;
 
+import com.chainsys.model.Donor;
+
 public class Donors {
 	ArrayList<Donor> donorRegister= new ArrayList<>();
 	public void addDonor(String name,int age,String mobileNumber,String bloodGrp,String location) {
