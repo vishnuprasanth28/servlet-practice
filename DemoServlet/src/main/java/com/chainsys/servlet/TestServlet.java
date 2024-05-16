@@ -2,6 +2,7 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/TestServlet")
 public class TestServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	Donors donors=new Donors();
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,11 +35,13 @@ public class TestServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String name=request.getParameter("name");
-		int Mobile=Integer.parseInt(request.getParameter("mobile"));
-		PrintWriter out=response.getWriter();
-		
-		out.println("Registration success"+" "+name);
-		
+		int age =Integer.parseInt(request.getParameter("age"));
+		String Mobile=request.getParameter("mobileNumber");
+		String bloodGroup=request.getParameter("bloodGrp");
+		String city=request.getParameter("location");
+		 donors.addDonor(name, age, Mobile, bloodGroup, city);
+		 request.setAttribute("donorRegister", donors.getDonorRegister());
+		 request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 
 	/**
