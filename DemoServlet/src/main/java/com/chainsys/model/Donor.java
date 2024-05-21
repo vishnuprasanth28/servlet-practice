@@ -1,4 +1,4 @@
-package com.chainsys.servlet;
+package com.chainsys.model;
 
 public class Donor {
 	String donorName;

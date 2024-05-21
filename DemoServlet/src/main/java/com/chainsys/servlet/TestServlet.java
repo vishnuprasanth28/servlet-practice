@@ -2,6 +2,7 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.chainsys.dao.Donors;
+import com.chainsys.model.Donor;
 
 /**
  * Servlet implementation class TestServlet
@@ -18,6 +22,7 @@ public class TestServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	Donors donors=new Donors();
+	Donor donor = new Donor();
 	
        
     /**
@@ -39,7 +44,19 @@ public class TestServlet extends HttpServlet {
 		String Mobile=request.getParameter("mobileNumber");
 		String bloodGroup=request.getParameter("bloodGrp");
 		String city=request.getParameter("location");
-		 donors.addDonor(name, age, Mobile, bloodGroup, city);
+		donor.setDonorName(name);
+		donor.setAge(age);
+		donor.setBloodGrp(bloodGroup);
+		donor.setMobileNumber(Mobile);
+		donor.setLocation(city);
+		 donors.addDonor(donor);
+		 try {
+			donors.registerDonor(donor);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		 request.setAttribute("donorRegister", donors.getDonorRegister());
 		 request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
