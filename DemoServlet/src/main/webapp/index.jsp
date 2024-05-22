@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Registration</title>
 <style>
         
         body {
@@ -99,6 +99,10 @@
         <br>
         <input type="submit" value="Register">
     </form>
+     
+    	
+    
+    
     </div> 
 </body>
 </html>

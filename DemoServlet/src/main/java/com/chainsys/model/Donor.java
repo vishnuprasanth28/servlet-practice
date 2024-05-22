@@ -1,11 +1,19 @@
 package com.chainsys.model;
 
 public class Donor {
+	int id;
 	String donorName;
 	int age;
 	String mobileNumber;
 	String bloodGrp;
 	String location;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDonorName() {
 		return donorName;
 	}
