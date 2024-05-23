@@ -54,12 +54,16 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        
+
     </style>
 </head>
 <body>
+  
 
  <div class="container">
     <form action="TestServlet" >
+ 
         <h2>Registration Form</h2>
         <label for="name">Donor name</label>
         <input type="text" id="name" placeholder=" your name" name="name" required>

@@ -115,4 +115,26 @@ public class Donors {
          System.out.println("updated :"+row);
 	
 }
+	public ArrayList<Donor> searchByBloodGrp(String bloodGroup) throws ClassNotFoundException, SQLException {
+		 ArrayList<Donor> donorRegister = new ArrayList<>(); 
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		 Connection connection = ConnectionUtil.getConnection();
+		 String update = "select id,donor_name,age,blood_group,location,mobile from donor_list where blood_group like ?";
+		 PreparedStatement prepareStatement = connection.prepareStatement(update);
+		 prepareStatement.setString(1, "%" + bloodGroup + "%");
+		ResultSet resultSet= prepareStatement.executeQuery();
+		 while (resultSet.next()) {
+			 
+	            Donor donor = new Donor(); 
+	            donor.setId(resultSet.getInt("id"));
+	            donor.setDonorName(resultSet.getString("donor_name"));
+	            donor.setAge(resultSet.getInt("age"));
+	            donor.setBloodGrp(resultSet.getString("blood_group"));
+	            donor.setMobileNumber(resultSet.getString("mobile"));
+	            donor.setLocation(resultSet.getString("location"));
+	            
+	            donorRegister.add(donor); 
+	        }
+		 return donorRegister;
+	}
 }

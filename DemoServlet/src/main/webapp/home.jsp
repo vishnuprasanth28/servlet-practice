@@ -57,6 +57,7 @@
         </tr>
     </thead>
     <tbody>
+    	
         <% 
         int i=0;
         ArrayList<Donor> donorRegister = (ArrayList<Donor>) request.getAttribute("donorRegister");
@@ -83,6 +84,12 @@
                   </td>
         </tr>
        <% }} %>
+        	<form action="SearchServlet" method="post">
+    
+        <input type="text" name="bloodGroup"  placeholder="Search by Blood Group">
+        <input type="submit" value="Search">
+   
+</form>
     </tbody>
    
 </table>
