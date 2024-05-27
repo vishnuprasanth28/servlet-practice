@@ -3,6 +3,13 @@
 <%@ page import="com.chainsys.model.Donor" %>
 
 <!DOCTYPE html>
+
+<% 
+if (session.getAttribute("admin")==null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+%>
 <html>
 <head>
     <meta charset="UTF-8">

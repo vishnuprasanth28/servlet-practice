@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
+<%
+response.setHeader("cache-control", "no-cache,no-store,must-revalidate");
+if (session.getAttribute("admin")==null) {
+    response.sendRedirect("login.jsp");
+    return;
+}
+String admin = null;
+
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("admin".equals(cookie.getName())) {
+                admin = cookie.getValue();
+                break;
+            }
+        }
+}
+%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -62,7 +81,9 @@
   
 
  <div class="container">
+ <h2><%= admin %> </h2>
     <form action="TestServlet" >
+    
  
         <h2>Registration Form</h2>
         <label for="name">Donor name</label>
@@ -104,7 +125,10 @@
         <input type="submit" value="Register">
     </form>
      
-    	
+    	<form action="LogOutServlet" method="post">
+    <input type="submit" value="Logout">
+</form>
+
     
     
     </div> 

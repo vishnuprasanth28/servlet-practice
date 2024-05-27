@@ -120,7 +120,8 @@ public class TestServlet extends HttpServlet {
 				}
 	                request.getRequestDispatcher("home.jsp").forward(request, response);
 	                break;
-	            	
+	           default: 
+	        	   	System.out.println("Invlaid action");
 	        }
 	    }
 	}

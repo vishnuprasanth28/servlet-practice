@@ -37,6 +37,7 @@ public class Donors {
 	            prepareStatement.setString(3, donor.getBloodGrp());
 	            prepareStatement.setString(4, donor.getLocation());
 	            prepareStatement.setString(5, donor.getMobileNumber());
+	            
 
 	            int rows = prepareStatement.executeUpdate();
 	            System.out.println("Added : " + rows);
@@ -60,7 +61,7 @@ public class Donors {
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        connection = ConnectionUtil.getConnection();
 	        
-	        String donorList = "select id,donor_name,age,blood_group,location,mobile from donor_list";
+	        String donorList = "select id,donor_name,age,blood_group,location,mobile from donor_list where isActive=1";
 	        prepareStatement = connection.prepareStatement(donorList);
 	        donorSet = prepareStatement.executeQuery();
 	        
@@ -94,7 +95,7 @@ public class Donors {
 		
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 		 Connection connection = ConnectionUtil.getConnection();
-		 String delete = "delete from donor_list where id= "+id;
+		 String delete = "update donor_list set isActive=0 where id= "+id;
 		 PreparedStatement prepareStatement = connection.prepareStatement(delete);
 		 int row = prepareStatement.executeUpdate();
 		 System.out.println("Affected row :"+row);
@@ -136,5 +137,25 @@ public class Donors {
 	            donorRegister.add(donor); 
 	        }
 		 return donorRegister;
+	}
+	public boolean adminLogin(String name, int passWord) throws ClassNotFoundException, SQLException {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection connection = ConnectionUtil.getConnection();
+		
+		String checkUser = "select admin from blood_stock where admin=? and password =?";
+		PreparedStatement prepareStatement = connection.prepareStatement(checkUser);
+		prepareStatement.setString(1, name);
+		prepareStatement.setInt(2, passWord);
+		ResultSet resultSet = prepareStatement.executeQuery();
+
+		if (!resultSet.next()) {
+			System.out.println("Please register");
+			return false;
+
+		} else {
+			System.out.println("welcome " + name);
+			return true;
+		}
+
 	}
 }
